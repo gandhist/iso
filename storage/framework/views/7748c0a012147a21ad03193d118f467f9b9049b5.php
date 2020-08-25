@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
     <meta name="keywords" content="P3SM, Sertifikat, Seminar, Jakarta, Indonesia, Seminar">
     <meta name="description" content="Sertifikat P3SM adalah Halaman Web untuk melakukan pendaftaran seminar yang diselenggarakan oleh P3SM"/>
 
@@ -14,7 +14,7 @@
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <!-- Our Custom CSS -->
-    <link rel="stylesheet" href="{{ asset('frontend/style5.css') }}">
+    <link rel="stylesheet" href="<?php echo e(asset('frontend/style5.css')); ?>">
 
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
@@ -45,7 +45,7 @@
             line-height: 1.2;
         }        
 
-        @media only screen and (max-width: 760px),(min-device-width: 768px) and (max-device-width: 1024px)  {
+        @media  only screen and (max-width: 760px),(min-device-width: 768px) and (max-device-width: 1024px)  {
             /* Force table to not be like tables anymore */
             table, thead, tbody, th, td, tr { 
                 display: block; 
@@ -106,24 +106,7 @@
     <div class="wrapper">
         
         <!-- Sidebar Holder -->
-        {{-- <nav id="sidebar">
-            <div class="sidebar-header">
-                <h3>P3SM</h3>
-            </div>
-
-            <ul class="list-unstyled components">
-                @if(!Auth::user())
-                <li class="active">
-                    <a href="{{ route('login') }}">Login</a>
-                </li>
-                @else
-                <li class="active">
-                    <a href="{{ route('infoseminar') }}">Seminar</a>
-                    <a href="{{ route('profile.edit') }}">User Profile</a>
-                </li>
-                @endif
-            </ul>    
-        </nav> --}}
+        
 
         <!-- Page Content Holder -->
         <div id="content">
@@ -135,65 +118,51 @@
                         <i class="fas fa-align-justify"></i>
                     </button>
                     
-                    @if(!Auth::user())
+                    <?php if(!Auth::user()): ?>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item active">
-                                <a class="nav-link" href="{{ url('') }}">Beranda</a>
+                                <a class="nav-link" href="<?php echo e(url('')); ?>">Beranda</a>
                             </li>
                             <li class="nav-item active">
-                                <a class="nav-link" href= "{{ url('infoseminar') }}">Seminar</a>
+                                <a class="nav-link" href= "<?php echo e(url('infoseminar')); ?>">Seminar</a>
                             </li>
                             <li class="nav-item active">
-                                <a class="nav-link" href="{{ url('registrasi') }}">Bergabung</a>
+                                <a class="nav-link" href="<?php echo e(url('registrasi')); ?>">Bergabung</a>
                             </li>
                             <li class="nav-item active">
-                                <a class="nav-link" href="{{ url('login') }}">Login</a>
+                                <a class="nav-link" href="<?php echo e(url('login')); ?>">Login</a>
                             </li>
                         </ul>
                     </div>
-                    @else
+                    <?php else: ?>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item active">
-                                <a class="nav-link" href= "{{ url('infoseminar') }}">Seminar</a>
+                                <a class="nav-link" href= "<?php echo e(url('infoseminar')); ?>">Seminar</a>
                             </li>
                             <li class="nav-item active">
-                                <a class="nav-link" href="{{ route('profile.edit') }}">User Profile</a>
+                                <a class="nav-link" href="<?php echo e(route('profile.edit')); ?>">User Profile</a>
                             </li>
                             <li class="nav-item active">
                                 <a class="nav-link" href="javascript:void" onclick="$('#logout-form').submit();">
                                     Sign Out
                                 </a>
-                                <form id="logout-form" action="{{ url('logout') }}" method="POST" style="display: none;">
-                                    @csrf
+                                <form id="logout-form" action="<?php echo e(url('logout')); ?>" method="POST" style="display: none;">
+                                    <?php echo csrf_field(); ?>
                                 </form>
-                                {{-- <form method="post" action="{{ url('logout') }}" style="display: inline">
-                                    {{ csrf_field() }}
-                                    <button class="btn btn-primary" type="submit">Sign Out</button>
-                                  </form> --}}
+                                
                             </li>
                         </ul>
                     </div>
                     <!-- Default dropleft button -->
-                    {{-- <div class="btn-group dropleft">
-                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-user"></i>
-                            {{ \Auth::user()->name }}
-                        </button>
-                        <div class="dropdown-menu">
-                        <form method="post" action="{{ url('logout') }}" style="display: inline">
-                            {{ csrf_field() }}
-                            <button class="btn btn-default" type="submit">Sign Out</button>
-                          </form>
-                        </div>
-                    </div> --}}
-                    @endif
+                    
+                    <?php endif; ?>
                 </div>
             </nav>
-            {{-- content goes here --}}
-            @yield('content')
-            {{-- content end here --}}
+            
+            <?php echo $__env->yieldContent('content'); ?>
+            
 
         </div>
               
@@ -203,16 +172,14 @@
     <footer>
         <!-- Footer Area Start -->
         <section class="footer-Content">
-        {{-- <div class="container">
         
-        </div> --}}
         <!-- Copyright Start  -->
         <div class="copyright">
             <div class="container">
                 <div class="row" align="center">
                     <div class="col-md-12">
                         <div class="site-info">
-                            &copy; {{ \Carbon\Carbon::now()->isoFormat('YYYY') }} - All Rights Reserved
+                            &copy; <?php echo e(\Carbon\Carbon::now()->isoFormat('YYYY')); ?> - All Rights Reserved
                         </div>
                     </div>
                 </div>
@@ -262,6 +229,6 @@
         }
         function initialize(i,t){var e;i.getElementById(t)?initFreshChat():((e=i.createElement("script")).id=t,e.async=!0,e.src="https://wchat.freshchat.com/js/widget.js",e.onload=initFreshChat,i.head.appendChild(e))}function initiateCall(){initialize(document,"freshchat-js-sdk")}window.addEventListener?window.addEventListener("load",initiateCall,!1):window.attachEvent("load",initiateCall,!1);
       </script>
-    @stack('script')
+    <?php echo $__env->yieldPushContent('script'); ?>
 </body>
 </html>

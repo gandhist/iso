@@ -11,24 +11,14 @@
 |
 */
 Route::auth();
-Route::get('login/google', 'Auth\LoginController@redirectToProvider');
-Route::get('login/google/callback', 'Auth\LoginController@handleProviderCallback');
 Route::get('', 'FrontendController@index')->name('homeUI');
-Route::get('/cari', 'FrontendController@loadData');
-Route::get('reset', 'FrontendController@reset');
-Route::post('reset/update', 'FrontendController@update');
-Route::post('/autocomplete/fetch', 'FrontendController@fetch')->name('autocomplete.fetch');
-
 Route::get('infoseminar','InfoSeminarController@index')->name('infoseminar');
 Route::get('infoseminar/detail/{id}','InfoSeminarController@detail');
 Route::get('infoseminar/daftar/{id}','InfoSeminarController@daftar');
 Route::post('infoseminar/store/{id}','InfoSeminarController@store');
-Route::get('kirimwa','SeminarController@kirimWA');
 
 Route::get('registrasi','RegistController@index');
 Route::post('registrasi/store','RegistController@store');
-Route::get('registrasi/daftar/{id}','RegistController@daftar');
-Route::post('registrasi/save/{id}','RegistController@save');
 
 Route::get('profile', 'ProfileController@edit')->name('profile.edit');
 Route::post('profile', 'ProfileController@update')->name('profile.update');
@@ -71,12 +61,6 @@ Route::namespace('Iso')->group(function(){
 	Route::post('iso/bentuk_no', 'IsoController@bentukNo')->name('bentukNoIso');
 });
 
-Route::namespace('Master')->prefix('master')->group(function(){
-	Route::namespace('Scope')->group(function(){
-		Route::resource('scope', 'ScopeController');
-	});
-});
-
 
 
 Route::group(['middleware' => 'auth'], function () {
@@ -98,7 +82,6 @@ Route::group(['middleware' => 'auth.admin','prefix' => 'seminar'], function () {
 	Route::get('kirim_email/{id}','SeminarController@kirimEmail');
 	Route::get('send_email/{no_srtf}','SeminarController@sendEmail');
 	Route::get('approve/{id}','SeminarController@approve');
-	Route::post('kirimlink/{id}','SeminarController@kirimLink');
 
 });
 // Route::get('cetak_sertifikat/{no_srtf}','SeminarController@cetakSertifikat');
@@ -110,6 +93,12 @@ Route::group(['middleware' => 'auth.admin','prefix' => 'seminar'], function () {
 Route::namespace('Iso')->group(function(){
 	Route::post('iso/destroy', 'IsoController@destroy');
 	Route::resource('isos', 'IsoController');
+});
+
+Route::namespace('Master')->prefix('master')->group(function(){
+	Route::namespace('Scope')->group(function(){
+		Route::resource('scope', 'ScopeController');
+	});
 });
 
 // TUK
@@ -175,7 +164,6 @@ Route::group(['middleware' => 'auth.admin','prefix' => 'instansi'], function () 
 		Route::resources([
 			'users' => 'UserController',
 		]);
-
 		Route::resources([
 			'user_role' => 'UserRoleController',
 		]);
