@@ -431,10 +431,10 @@
                         </tr>
                     </table>
                     <br>
-                {{-- </ol> --}}
+                </ol>
                 {{-- <br> --}}
 
-                {{-- <ol type="1" start="8" style="page-break-inside: avoid;" > --}}
+                <ol type="1" start="8" style="page-break-inside: avoid;" >
                     <li><b>Observasi Dan Peluang Peningkatan</b></li>
                     <ol type="1">
                         @foreach($data->obs_r as $key)
@@ -445,8 +445,6 @@
                     </ol>
 
                 </ol>
-                <br>
-
             </div>
         </div>
     </div>
