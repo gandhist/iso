@@ -44,7 +44,7 @@ class LaporanController extends Controller
         $doc = isoDoc::where('id_iso',$iso)->get();
         $obs = isoObservasi::where('id_iso',$iso)->get();
         $data = [
-            'doc' => $doc, 
+            'doc' => $doc,
             'obs' => $obs
         ];
         return $data;
@@ -58,14 +58,15 @@ class LaporanController extends Controller
     public function create()
     {
         //
-        
+
         $scope = isoScope::all();
+        $scope_js = isoScope::all()->pluck( 'nama_en', 'id');
         $standard = isoStandard::all();
         $provinsi = ProvinsiModel::all();
         $kota = KotaModel::all();
         $negara = NegaraModel::all();
         $status = StatusModel::all();
-        return view('laporan.create')->with(compact('scope','standard','provinsi','kota','negara','status'));
+        return view('laporan.create')->with(compact('scope', 'scope_js','standard','provinsi','kota','negara','status'));
     }
 
     /**
@@ -90,7 +91,7 @@ class LaporanController extends Controller
                 "site_audited" => "required",
                 "lead_auditor" => "required",
                 "additional_members" => "required",
-                "scope" => "required",
+                "scope_array" => "required",
             ],
             [
                 "nama_bu.required" => "Organizatation Harus di isi!",
@@ -161,7 +162,7 @@ class LaporanController extends Controller
         $lp_save = $lp->save();
         $px_nama = "satf_";
         $px_val = "satf_val_";
-        for ($i=0; $i < 100 ; $i++) { 
+        for ($i=0; $i < 100 ; $i++) {
             if ($request->has($px_nama.$i)) {
                 // add new data
                 // echo $request->input($px_val.$i);
@@ -172,10 +173,10 @@ class LaporanController extends Controller
                 $obs->created_by = Auth::id();
                 $obs->created_at = Carbon::now()->toDateTimeString();
                 $obs->save();
-                
+
             }
         }
-        foreach($request->scope as $key => $val){
+        foreach($request->scope_array as $key => $val){
             $scope = new isoLapScope;
             $scope->id_laporan = $lp->id;
             $scope->id_scope = $val;
@@ -191,14 +192,15 @@ class LaporanController extends Controller
         $iso->nama_bu = $request->nama_bu;
         $iso->alamat = $request->alamat;
         $iso->tipe_iso = $request->standard;
+        $iso->scope = $request->scope;
         $iso->no_sert = $request->standard;
         $iso->tgl_sert = $request->tanggal;
         $iso->created_by = Auth::id();
         $iso->created_at = Carbon::now()->toDateTimeString();
-        $iso->valid_date = Carbon::parse($request->tanggal)->addYear(3)->isoFormat("YYYY-MM-DD"); 
-        $iso->first_surv = Carbon::parse($request->tanggal)->addYear(1)->isoFormat("YYYY-MM-DD"); 
-        $iso->second_surv = Carbon::parse($request->tanggal)->addYear(2)->isoFormat("YYYY-MM-DD"); 
-        $iso->recertification = Carbon::parse($request->tanggal)->addYear(3)->isoFormat("YYYY-MM-DD"); 
+        $iso->valid_date = Carbon::parse($request->tanggal)->addYear(3)->isoFormat("YYYY-MM-DD");
+        $iso->first_surv = Carbon::parse($request->tanggal)->addYear(1)->isoFormat("YYYY-MM-DD");
+        $iso->second_surv = Carbon::parse($request->tanggal)->addYear(2)->isoFormat("YYYY-MM-DD");
+        $iso->recertification = Carbon::parse($request->tanggal)->addYear(3)->isoFormat("YYYY-MM-DD");
         $iso->save();
         return response()->json([
             'status' => true,
@@ -285,7 +287,7 @@ class LaporanController extends Controller
         // $lp = new Laporan;
         // $lp->id_bu = $bu->id;
         $lp->id_number = $request->id_number;
-        
+
         // $lp->iso_standard = $request->standard;
         $lp->status = $request->status;
         $lp->is_reseller = $request->reseller;
@@ -328,7 +330,7 @@ class LaporanController extends Controller
         $px_nama = "satf_";
         $px_val = "satf_val_";
         $id_obs_delete = [];
-        for ($i=0; $i < 100 ; $i++) { 
+        for ($i=0; $i < 100 ; $i++) {
             if ($request->has($px_nama.$i)) {
                 // add new data
                 if($request->input('id_satf_'.$i) == 'new_data' ){
@@ -353,7 +355,7 @@ class LaporanController extends Controller
                     $obs->save();
                     $id_obs_delete[] = $obs->id;
                 }
-                
+
             }
         }
         // $obs_del = isoLapObs::whereNotIn('id',$id_obs_delete)->update(
@@ -370,7 +372,7 @@ class LaporanController extends Controller
             ]
         );
         foreach($request->scope as $key => $val){
-            
+
             $scope = new isoLapScope;
             $scope->id_laporan = $lp->id;
             $scope->id_scope = $val;
@@ -386,10 +388,10 @@ class LaporanController extends Controller
         $iso->tipe_iso = $lp->iso_standard;
         $iso->no_sert = $request->id_number;
         $iso->tgl_sert = $request->tanggal;
-        $iso->valid_date = Carbon::parse($request->tanggal)->addYear(3)->isoFormat("YYYY-MM-DD"); 
-        $iso->first_surv = Carbon::parse($request->tanggal)->addYear(1)->isoFormat("YYYY-MM-DD"); 
-        $iso->second_surv = Carbon::parse($request->tanggal)->addYear(2)->isoFormat("YYYY-MM-DD"); 
-        $iso->recertification = Carbon::parse($request->tanggal)->addYear(3)->isoFormat("YYYY-MM-DD"); 
+        $iso->valid_date = Carbon::parse($request->tanggal)->addYear(3)->isoFormat("YYYY-MM-DD");
+        $iso->first_surv = Carbon::parse($request->tanggal)->addYear(1)->isoFormat("YYYY-MM-DD");
+        $iso->second_surv = Carbon::parse($request->tanggal)->addYear(2)->isoFormat("YYYY-MM-DD");
+        $iso->recertification = Carbon::parse($request->tanggal)->addYear(3)->isoFormat("YYYY-MM-DD");
         $iso->updated_by = Auth::id();
         $iso->updated_at =  Carbon::now()->toDateTimeString();
         $iso->save();
@@ -413,7 +415,7 @@ class LaporanController extends Controller
             'deleted_at' => Carbon::now()->toDateTimeString(),
             'deleted_by' => Auth::id(),
         ]);
-        
+
         $iso = IsoModel::whereIn('id_laporan', $id);
         $iso->update([
             'deleted_at' => Carbon::now()->toDateTimeString(),
@@ -425,7 +427,7 @@ class LaporanController extends Controller
     public function print($id){
 
         $data = Laporan::find($id);
-       
+
 
         /*
          * Remove the load pdf use dompdf

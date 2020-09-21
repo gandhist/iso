@@ -24,7 +24,7 @@
         <div class="box-body">
             @if(session()->get('success'))
             <div class="alert alert-success">
-              {{ session()->get('success') }}  
+              {{ session()->get('success') }}
             </div>
             @endif
 
@@ -32,7 +32,7 @@
             <div>
               <h3>Buat Laporan ISO</h3>
               <form id="formAdd" name="formAdd" method="POST">
-              
+
               <div class="row">
                 <div class="col-md-12">
                     <!-- Custom Tabs -->
@@ -66,13 +66,13 @@
                                         <div class="form-group">
                                             <label>Organization</label>
                                             <input name="nama_bu" id="nama_bu" type="text" class="form-control" placeholder="Organization">
-                                            <span id="nama_bu" class="help-block" >{{ $errors->first('nama_bu') }} </span> 
+                                            <span id="nama_bu" class="help-block" >{{ $errors->first('nama_bu') }} </span>
                                           </div>
-                          
+
                                           <div class="form-group">
                                             <label>Address</label>
                                             <textarea id="alamat" name="alamat" class="form-control" rows="3" placeholder="Address"></textarea>
-                                            <span id="alamat" class="help-block" >{{ $errors->first('alamat') }} </span> 
+                                            <span id="alamat" class="help-block" >{{ $errors->first('alamat') }} </span>
 
                                           </div>
                                           <div class="form-group">
@@ -113,75 +113,75 @@
                                                     <option value="{{ $key->id }}">{{ $key->kode }}</option>
                                                 @endforeach
                                             </select>
-                                            <span id="id_number" class="help-block" >{{ $errors->first('id_number') }} </span> 
+                                            <span id="id_number" class="help-block" >{{ $errors->first('id_number') }} </span>
 
                                         </div>
-                                          
+
                                           {{-- <div class="form-group">
                                               <label>Id Number</label>
                                               <input name="id_number" id="id_number" type="text" class="form-control" placeholder="Id Number">
-                                                <span id="id_number" class="help-block" >{{ $errors->first('id_number') }} </span> 
+                                                <span id="id_number" class="help-block" >{{ $errors->first('id_number') }} </span>
 
                                           </div> --}}
-          
+
                                           <div class="form-group">
                                               <label>Visit Number</label>
                                               <input name="visit_number" id="visit_number" type="text" class="form-control" placeholder="Visit Number">
-                                              <span id="visit_number" class="help-block" >{{ $errors->first('visit_number') }} </span> 
-                                              
+                                              <span id="visit_number" class="help-block" >{{ $errors->first('visit_number') }} </span>
+
                                           </div>
-          
+
                                           <div class="form-group">
                                               <label>Audit Date</label>
                                               <input name="tanggal" id="tanggal" type="date" class="form-control" placeholder="Audit Date">
-                                              <span id="tanggal" class="help-block" >{{ $errors->first('tanggal') }} </span> 
+                                              <span id="tanggal" class="help-block" >{{ $errors->first('tanggal') }} </span>
 
                                           </div>
-          
-                                         
+
+
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>Visit Type</label>
                                             <input name="visit_type" id="visit_type" type="text" class="form-control" placeholder="Visit Type">
-                                            <span id="visit_type" class="help-block" >{{ $errors->first('visit_type') }} </span> 
+                                            <span id="visit_type" class="help-block" >{{ $errors->first('visit_type') }} </span>
 
                                         </div>
 
                                         <div class="form-group">
                                             <label>Company Representative</label>
                                             <input name="comp_rep" id="comp_rep" type="text" class="form-control" placeholder="Company Representative">
-                                            <span id="comp_rep" class="help-block" >{{ $errors->first('comp_rep') }} </span> 
+                                            <span id="comp_rep" class="help-block" >{{ $errors->first('comp_rep') }} </span>
 
                                         </div>
-        
+
                                         <div class="form-group">
                                             <label>Site Audited</label>
                                             <input name="site_audited" id="site_audited" type="text" class="form-control" placeholder="Site Audited">
-                                            <span id="site_audited" class="help-block" >{{ $errors->first('site_audited') }} </span> 
+                                            <span id="site_audited" class="help-block" >{{ $errors->first('site_audited') }} </span>
 
                                         </div>
-        
+
                                         <small>* <i>Untuk multi-situs audit, semua situs diaudit akan tercantum dalam lingkup audit atau dalam lampiran</i></small>
-        
-        
+
+
                                         <div class="form-group">
                                             <label>Lead Auditor</label>
                                             <input name="lead_auditor" id="lead_auditor" type="text" class="form-control" placeholder="Lead Auditor">
-                                            <span id="lead_auditor" class="help-block" >{{ $errors->first('lead_auditor') }} </span> 
+                                            <span id="lead_auditor" class="help-block" >{{ $errors->first('lead_auditor') }} </span>
                                         </div>
-        
+
                                         <div class="form-group">
                                             <label>Additional Team Members</label>
                                             <input name="additional_members" id="additional_members" type="text" class="form-control" placeholder="Site Audited">
-                                            <span id="additional_members" class="help-block" >{{ $errors->first('additional_members') }} </span> 
+                                            <span id="additional_members" class="help-block" >{{ $errors->first('additional_members') }} </span>
 
                                         </div>
                                         <small>* <i>Untuk multi-situs audit, semua situs diaudit akan tercantum dalam lingkup audit atau dalam lampiran</i></small>
-                        
+
                                     </div>
                                 </div>
-                                
+
                         </div>
                         <!-- /.tab-pane -->
                         <div class="tab-pane " id="tab_2">
@@ -200,33 +200,44 @@
                                             </li>
                                           <li class="list-group-item">
                                                 <b>2. Ruang Lingkup Sertifikasi</b> <br>
-                                                Audit mencakup : 
+                                                Audit mencakup :
 
-                                                <select style="width: 100%" class="form-control select2" id="scope" name="scope[]" multiple="multiple">
+                                                <select style="width: 100%" class="form-control select2" id="scope_array" name="scope_array[]" multiple="multiple">
                                                     @foreach($scope as $key)
                                                     <option value="{{ $key->id }}">{{ $key->nama_id }}</option>
                                                     @endforeach
-                                                </select> 
+                                                </select>
 
                                                 <br>
                                                 <small>Ini adalah audit multi-situs dan lampiran daftar semua situs yang relevan dan / atau lokasi terpencil telah ditetapkan (terlampir) dan setuju dengan klien</small></span> &nbsp &nbsp
                                                 <select name="multi_situs" id="multi_situs">
-                                                    <option value="ya">Yes</option>
                                                     <option value="tidak">No</option>
+                                                    <option value="ya">Yes</option>
                                                 </select>
+
+                                                <br>
+                                                Gunakan ruang lingkup custom
+                                                <select name="tulis" id="tulis">
+                                                    <option value="tidak"> Tidak</option>
+                                                    <option value="ya"> Ya</option>
+                                                </select>
+                                                <br>
+                                                Ruang lingkup pada sertifikat:
+                                                <br>
+                                                <textarea name="scope" id="scope" cols="30" rows="5" class="form-control"></textarea>
 
                                           </li>
                                           <li class="list-group-item">
                                             <b>3. Temuan Audit Saat Ini Dan Solusi</b> <br>
                                             Tim audit melakukan audit proses berbasis berfokus pada aspek penting / resiko / tujuan diperlukan oleh standar. Metode audit yang dilakukan adalah wawancara, observasi kegiatan dan review dokumentasi catatan. <br>
                                             Struktur audit sudah sesuai dengan rencana audit dan matriks perencanaan audit yang disertakan sebagai lampiran laporan ringkasan. <br>
-                                            Tim audit menyimpulkan bahwa organisasi 
+                                            Tim audit menyimpulkan bahwa organisasi
                                             <select name="tas_1" id="tas_1">
                                                 <option value="telah"> Telah</option>
                                                 <option value="belum"> Belum</option>
                                             </select>
                                             ditetapkan dan dipelihara sistem manajemen sesuai dengan persyaratan standar dan menunjukkan kemampuan sistem untuk secara sistematis mencapai persyaratan yang disepakati untuk produk atau jasa dalam lingkup dan kebijakan organisasi dan tujuan. <br>
-                                            Jumlah ketidak sesuaian diidentifikasi: 
+                                            Jumlah ketidak sesuaian diidentifikasi:
                                             <b>
                                                 <select name="tas_2" id="tas_2">
                                                     <option value="mayor"> Mayor</option>
@@ -235,7 +246,7 @@
                                             </b>
                                             <br>
                                             Oleh karena itu tim audit merekomendasikan bahwa, berdasarkan hasil dari audit dan keadaan sistem menunjukkan perkembangan dan kematangan, sertifikasi sistem manajemen menjadi: <br>
-                                           
+
                                             <select name="tas_3" id="tas_3">
                                                 <option value="diberikan"> Diberikan</option>
                                                 <option value="lanjut"> Lanjut</option>
@@ -251,9 +262,9 @@
                                                 <option value="2"> Sistem manajemen belum ditangani ketidaksesuaian yang diidentifikasi selama kegiatan audit sebelumnya dan isu tertentu telah kembali didefinisikan dalam bagian ketidaksesuaian laporan ini.</option>
                                                 <option value="3"> Tidak ada Corrective Action Request (CAR) dari kunjungan sebelumnya untuk ditindaklanjuti.</option>
                                             </select>
-                                            
+
                                           </li>
-                                          <li class="list-group-item"> 
+                                          <li class="list-group-item">
                                             <b>5. Temuan Audit</b> <br>
                                             Tim audit melakukan proses audit berdasarkan berfokus pada aspek yang signifikan / resiko / tujuan. Metode audit yang digunakan adalah wawancara, observasi kegiatan dan review dokumentasi dan catatan. <br>
                                             <div class="table-responsive">
@@ -337,10 +348,10 @@
                                                                     <span id="nama_anggota_1" class="help-block" > {{ $errors->first('nama_anggota_1') }} </span>
                                                                 </td>
                                                                 <td>
-                                                                    <button disabled type='button' onclick="$(this).closest('tr').remove(); removeItem();" class="btn btn-danger btn-sm" ><span class="fa fa-times-circle" ></span></button> 
+                                                                    <button disabled type='button' onclick="$(this).closest('tr').remove(); removeItem();" class="btn btn-danger btn-sm" ><span class="fa fa-times-circle" ></span></button>
                                                                 </td>
                                                             </tr> --}}
-                                                           
+
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -353,7 +364,7 @@
                                       </div>
                                 </div>
                             </div>
-                            
+
                         </div>
                         <!-- /.tab-pane -->
                         <div class="tab-pane" id="tab_3">
@@ -368,7 +379,7 @@
                                     <tr>
                                         <td colspan="3" style="text-align: justify;"><input type="radio" class="Radio" name="car" value="1"> <b>Major</b></td>
                                         <td colspan="3" style="text-align: justify;"><input type="radio" class="Radio" name="car" value="0"> <b>Minor</b></td>
-                                        
+
                                     <tr>
                                         <td colspan="24" style="padding: 2px; border: 1px solid black;"><b>Organisasi : <span id="nama_perusahaan" contenteditable="true" placeholder="Nama Perusahaan" style="text-transform: uppercase;"></span></b></td>
                                     </tr>
@@ -397,13 +408,13 @@
                                         <td colspan="12" style="padding: 2px; border: 1px solid black;">CAR Close-Out date : <input name="car_date" id="car_date" type="date" class="form-control"></td>
                                     <tr>
                                     <tr>
-                                        <td colspan="24" style="padding: 2px; border: 1px solid black; text-align: justify;"><b>Detail of Non-Conformity : 
+                                        <td colspan="24" style="padding: 2px; border: 1px solid black; text-align: justify;"><b>Detail of Non-Conformity :
                                             <select name="doc" id="doc">
                                             </select>
                                             <br>
                                             <span id="det_non_conf" contenteditable="true" placeholder=". . . . . . . ."></span></b></td>
                                     </tr>
-                    
+
                                     <tr>
                                         <td colspan="12" style="padding: 2px; border: 1px solid black;"><b>Organization Representative : <input name="or2" id="or2" type="text" class="form-control"></b></td>
                                         <td colspan="12" style="padding: 2px; border: 1px solid black;"><b>Auditor : <input name="auditor1" id="auditor1" type="text" class="form-control"></b></td>
@@ -437,7 +448,7 @@
                                         <td colspan="3" style="padding: 2px; border: 1px solid black; vertical-align: top; text-align: center; background-color: lightblue;"><b>Close Out</b></td>
                                     <tr>
                                     <tr>
-                    
+
                                         <td colspan="3" rowspan="2" style="padding: 2px; border: 1px solid black; vertical-align: top; text-align: center;"><b>1 Bulan</b></td>
                                         <td colspan="3" rowspan="2" style="padding: 2px; border: 1px solid black; vertical-align: top; text-align: center;"><b>3 Bulan</b></td>
                                         <td colspan="3" rowspan="2" style="padding: 2px; border: 1px solid black; vertical-align: top; text-align: center;"><b>3 Bulan</b></td>
@@ -469,7 +480,7 @@
             </div>
             </div>
             {{--  end of table seminar  --}}
-            
+
 
 
         </div>
@@ -485,10 +496,12 @@
 
 @push('script')
 <script>
+var scope = @json($scope_js);
 var counter = 1;
 var satf = "";
 var doc = "";
 
+// console.log(scope);
 $(function(){
 
     $("#id_prov").select2({
@@ -532,10 +545,10 @@ $(function(){
         add_row();
     });
 
-    $("#scope").on("select2:select", function (evt) {
+    $("#scope_array").on("select2:select", function (evt) {
         var element = evt.params.data.element;
         var $element = $(element);
-        
+
         $element.detach();
         $(this).append($element);
         $(this).trigger("change");
@@ -545,6 +558,44 @@ $(function(){
 
 
 });
+
+// Scope auto fill
+$(function() {
+    $('#scope_array').on('select2:select', function(e) {
+        var is_tulis = $('#tulis').val();
+        var id_scope = e.params.data.id;
+        var isi = $('#scope');
+        if(is_tulis === 'tidak') {
+            // console.log(scope[id_scope]);
+            if(isi.val() !== '')  {
+                isi.val(isi.val() + ', ' + scope[id_scope]);
+            } else {
+                isi.val(isi.val() + scope[id_scope]);
+            }
+        }
+    });
+
+    $('#scope_array').on('select2:unselect', function(e) {
+        var is_tulis = $('#tulis').val();
+        var id_scope = e.params.data.id;
+        // console.log(e.params.data.id);
+        var isi = document.getElementById('scope');
+        if(is_tulis === 'tidak') {
+            // console.log(scope[id_scope]);
+            if(isi.value !== '')  {
+                // isi.val(isi.val() + scope[id_scope]);
+                if(isi.value.indexOf(', ' + scope[id_scope])!=-1){
+                    isi.value = isi.value.replace(', ' + scope[id_scope], "");
+                }
+                if(isi.value.indexOf(scope[id_scope])!=-1){
+                    isi.value = isi.value.replace(scope[id_scope] + ',', "");
+                    isi.value = isi.value.replace(scope[id_scope], "");
+                }
+            }
+        }
+    });
+});
+// End auto fill
 
 // add row anggota
 function add_row()
@@ -559,7 +610,7 @@ function add_row()
             <input type="hidden" name="id_satf_`+counter+`" id="id_satf_`+counter+`" value="new_data" class="form-control">
         </td>
         <td>
-            <button type='button' onclick="$(this).closest('tr').remove(); removeItem();" class="btn btn-danger btn-xs" ><span class="fa fa-times-circle" ></span></button> 
+            <button type='button' onclick="$(this).closest('tr').remove(); removeItem();" class="btn btn-danger btn-xs" ><span class="fa fa-times-circle" ></span></button>
         </td>
     </tr>`);
 }
@@ -575,7 +626,7 @@ function addSatf(counter, value){
             <input type="hidden" name="id_satf_`+counter+`" id="id_satf_`+counter+`" value="new_data" class="form-control">
         </td>
         <td>
-            <button type='button' onclick="$(this).closest('tr').remove(); removeItem();" class="btn btn-danger btn-xs" ><span class="fa fa-times-circle" ></span></button> 
+            <button type='button' onclick="$(this).closest('tr').remove(); removeItem();" class="btn btn-danger btn-xs" ><span class="fa fa-times-circle" ></span></button>
         </td>
     </tr>`);
     // $('.satf').append(`
