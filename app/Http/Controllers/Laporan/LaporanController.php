@@ -128,6 +128,7 @@ class LaporanController extends Controller
         $lp->site_audited = $request->site_audited;
         $lp->lead_auditor = $request->lead_auditor;
         $lp->additional_member = $request->additional_members;
+        $lp->scope = $request->scope;
         $lp->scope_multi_situs = $request->multi_situs;
         $lp->audit_sebelumnya = $request->audit_sebelumnya;
         $lp->tas_1 = $request->tas_1;
@@ -192,7 +193,6 @@ class LaporanController extends Controller
         $iso->nama_bu = $request->nama_bu;
         $iso->alamat = $request->alamat;
         $iso->tipe_iso = $request->standard;
-        $iso->scope = $request->scope;
         $iso->no_sert = $request->standard;
         $iso->tgl_sert = $request->tanggal;
         $iso->created_by = Auth::id();
@@ -263,7 +263,7 @@ class LaporanController extends Controller
                 "site_audited" => "required",
                 "lead_auditor" => "required",
                 "additional_members" => "required",
-                "scope" => "required",
+                "scope_array" => "required",
             ],
             [
                 "nama_bu.required" => "Organizatation Harus di isi!",
@@ -297,6 +297,7 @@ class LaporanController extends Controller
         $lp->site_audited = $request->site_audited;
         $lp->lead_auditor = $request->lead_auditor;
         $lp->additional_member = $request->additional_members;
+        $lp->scope = $request->scope;
         $lp->scope_multi_situs = $request->multi_situs;
         $lp->audit_sebelumnya = $request->audit_sebelumnya;
         $lp->tas_1 = $request->tas_1;
@@ -371,7 +372,7 @@ class LaporanController extends Controller
                 'deleted_at' => Carbon::now()->toDateTimeString(),
             ]
         );
-        foreach($request->scope as $key => $val){
+        foreach($request->scope_array as $key => $val){
 
             $scope = new isoLapScope;
             $scope->id_laporan = $lp->id;
@@ -435,9 +436,14 @@ class LaporanController extends Controller
             $pdf->setPaper('A4','portrait');
             return $pdf->stream("laporan.pdf");
          */
+        $mpdfConfig = array(
+            'format' => 'A4',
+            'margin_top' => 50,     // 30mm not pixel
+            'margin_bottom' => 20,
+            'orientation' => 'P'
+        );
 
-
-        $mpdf = new \Mpdf\Mpdf();
+        $mpdf = new \Mpdf\Mpdf($mpdfConfig);
         // $mpdf = new \Mpdf();
 
         $mpdf->SetHeader('');
