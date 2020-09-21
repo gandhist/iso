@@ -23,7 +23,7 @@
       body {
         margin: 0px;
         padding: 0;
-        background-color: #FAFAFA;
+        /* background-color: #FAFAFA; */
         font-family: Arial, Helvetica, sans-serif;
         font-size: 16px;
       }
@@ -110,17 +110,25 @@
           <p style="font-size: 26px; margin-top:-10px; font-weight: bold; text-align: center;">{{ $data->nama_bu }}</p>
         </div>
         <p style="margin-top: -20px; text-align: center; text-indent: 22px">{{ $data->alamat }} {{ $data->kota ? $data->kota_r->nama : '' }}</p>
-        <p style="line-height: 150%; text-align: center;">&nbsp; has been assessed and registered <strong>PT. Sertifikasi Badan Usaha Mandiri</strong> 
+        <p style="line-height: 150%; text-align: center;">&nbsp; has been assessed and registered by <strong>PT. Sertifikasi Badan Usaha Mandiri</strong> 
           <br> as confirming to the requirements of :</p>
         <p style="font-size: 24px; font-weight: bold; color: #206f9c; text-transform: uppercase; text-align: center;">{{ $data->iso_r->nama_en }}</p>
         <p style="font-size: 42px; font-weight: bold; color: #206f9c; text-transform: uppercase; text-align: center; margin-top: -5PX;">{{ $data->iso_r->kode }}</p>
         <P style="margin-top: -10px; text-align: center;">For the following Scope :</P>
+        @if($data->lap_r->scope_r->count() == 1)
+        <p style="font-size: 16px; font-weight: bold; text-align: center; line-height: 150%;">
+         @foreach($data->lap_r->scope_r as $key)
+         "{{ $key->scope_r->nama_en }}"
+         @endforeach
+        </p>
+        @else 
         <p style="font-size: 16px; font-weight: bold; text-align: justify; line-height: 150%;">
             "Provision of
            @foreach($data->lap_r->scope_r as $key)
-           @if($loop->last) And @endif{{ $key->scope_r->nama_en }}@if(!$loop->last), @endif
+           @if($loop->last) and @endif{{ $key->scope_r->nama_en }}@if(!$loop->last), @endif
            @endforeach
             "</p>
+        @endif
       </div>
       <div style="margin-left: 115px; margin-right: 120px;">
       <table class="cert" width="420px">
@@ -156,7 +164,8 @@
             <span height="100px"></span>
             @endif
           </td>
-          <td colspan="8" style="padding: 20px; vertical-align: bottom; text-align: center;"><img src="{{  public_path('iso/images/') }}/tt_dasril.png" width="140px" height="50px" ><br>Director</td>
+          <td colspan="8" style="padding: 20px; vertical-align: bottom; text-align: center;"><img style="background-color: transparent;
+            border: none;" src="{{  public_path('iso/images/') }}/tt_dasril.png" width="140px" height="50px" ><br>Director</td>
         </tr>
         {{-- <tr>
           <td colspan="8" style="text-align: left;">

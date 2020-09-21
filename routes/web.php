@@ -56,6 +56,8 @@ Route::namespace('Laporan')->group(function(){
 
 Route::namespace('Iso')->group(function(){
 	Route::get('iso/print/{id}', 'IsoController@print');
+	Route::get('iso/print/crowded/{id}', 'IsoController@printx');
+	Route::get('iso/print/crowded/blanko/{id}', 'IsoController@printxBlanko');
 	Route::get('iso/print_blanko/{id}', 'IsoController@print_blanko');
 
 	Route::post('iso/bentuk_no', 'IsoController@bentukNo')->name('bentukNoIso');

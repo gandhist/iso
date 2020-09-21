@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sertifikat ISO </title>
+    <title>Sertifikat ISO {{ $data->nama_bu }}</title>
 
     <style>
       
@@ -44,7 +44,7 @@
           border-radius: 0px;
           
           box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-          /* background-image: url("/iso/images/blanko_iso.png"); */
+          
           background-size: contain;
           background-repeat: no-repeat;
       }
@@ -81,8 +81,11 @@
 
 </head>
 <body>
-    
-      <div class="page">
+      @if($data->is_reseller == 0)
+      <div class="page" style="background-image: url('/iso/images/blanko_iso.png');">
+        @else
+        <div class="page" style="background-image: url('/iso/images/blanko_iso_nopo.png');">
+      @endif
         <div id="watermark">
           @if($data->status == 1)
             <h1>{{ $data->status_r->nama }}</h1>
@@ -101,23 +104,25 @@
         <br>
         {{-- <span style="color: #206f9c; font-size: 18px;"><strong>{{ $data->iso_r->kode }}</strong></span> --}}
       </div>
-      <div style="margin-top: 90px; margin-left: 115px; margin-right: 120px; text-align: justify;">
-        <p style="text-align: center;">This is to certify that</p>
-        <p style="font-size: 28px; margin-top:-10px; font-weight: bold; text-align: center;">{{ $data->nama_bu }}</p>
-        <p style="margin-top: -20px; text-align: center;">{{ $data->alamat }} {{ $data->kota ? $data->kota_r->nama : '' }}</p>
-        <p style="line-height: 150%; text-align: center;">&nbsp; has been assessed and registered by <strong>PT. Sertifikasi Badan Usaha Mandiri</strong> 
+      <div style="margin-top: 90px; margin-left: 115px; margin-right: 110px; text-align: justify; border: 0px #206f9c solid;">
+        <p style="text-align: center; margin-top: -2px;">This is to certify that</p>
+        <div style="text-indent: 28px">
+          <p style="font-size: 26px; margin-top:-15px; font-weight: bold; text-align: center;">{{ $data->nama_bu }}</p>
+        </div>
+        <p style="margin-top: -20px; text-align: center; text-indent: 22px">{{ $data->alamat }} {{ $data->kota ? $data->kota_r->nama : '' }}</p>
+        <p style="line-height: 150%; text-align: center; margin-top:-15px;">&nbsp; has been assessed and registered by <strong>PT. Sertifikasi Badan Usaha Mandiri</strong> 
           <br> as confirming to the requirements of :</p>
-        <p style="font-size: 24px; font-weight: bold; color: #206f9c; text-transform: uppercase; text-align: center;">{{ $data->iso_r->nama_en }}</p>
-        <p style="font-size: 42px; font-weight: bold; color: #206f9c; text-transform: uppercase; text-align: center; margin-top: -5PX;">{{ $data->iso_r->kode }}</p>
-        <P style="margin-top: -10px; text-align: center;">For the following Scope :</P>
+        <p style="font-size: 24px; font-weight: bold; color: #206f9c; text-transform: uppercase; text-align: center; margin-top:-15px;">{{ $data->iso_r->nama_en }}</p>
+        <p style="font-size: 42px; font-weight: bold; color: #206f9c; text-transform: uppercase; text-align: center; margin-top: -15px;">{{ $data->iso_r->kode }}</p>
+        <P style="margin-top: -15px; text-align: center;">For the following Scope :</P>
         @if($data->lap_r->scope_r->count() == 1)
-        <p style="font-size: 16px; font-weight: bold; text-align: center; line-height: 150%;">
+        <p style="font-size: 16px; font-weight: bold; text-align: center; line-height: 120%; margin-top:-15px;">
          @foreach($data->lap_r->scope_r as $key)
          "{{ $key->scope_r->nama_en }}"
          @endforeach
         </p>
         @else 
-        <p style="font-size: 16px; font-weight: bold; text-align: justify; line-height: 150%;">
+        <p style="font-size: 16px; font-weight: bold; text-align: justify; line-height: 120%; margin-top:-15px;">
             "Provision of
            @foreach($data->lap_r->scope_r as $key)
            @if($loop->last) and @endif{{ $key->scope_r->nama_en }}@if(!$loop->last), @endif
@@ -152,14 +157,15 @@
           <td colspan="4"><u>{{ \Carbon\Carbon::parse($data->tgl_sert)->add('3','years')->isoFormat('DD-MM-YYYY') }}</u></td>
         </tr>
         <tr>
-          <td colspan="8" style="padding: 20px; vertical-align: bottom; text-align: left;">
+          <td colspan="8" style=" vertical-align: bottom; text-align: left;">
             @if($data->status != 1)
               <img src="{{  public_path('qr/') }}/QR_{{ $data->id }}.png" height="100px">
             @else
             <span height="100px"></span>
             @endif
           </td>
-          <td colspan="8" style="padding: 20px; vertical-align: bottom; text-align: center;"><img  style="background-color: transparent; border: none;" src="{{  public_path('iso/images/') }}/tt_dasril.png" width="140px" height="50px" ><br>Director</td>
+          <td colspan="8" style=" vertical-align: bottom; text-align: center;"><img style="background-color: transparent;
+            border: none;" src="{{  public_path('iso/images/') }}/tt_dasril.png" width="140px" height="50px" ><br>Director</td>
         </tr>
         {{-- <tr>
           <td colspan="8" style="text-align: left;">

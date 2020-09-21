@@ -140,6 +140,14 @@
                                     class="fa fa-file"></i>
                                     Blanko Iso</span>
                             </div>
+                            <div class="btn-group">
+                                <span class="btn btn-primary" id="printIso_v1"><i
+                                    class="fa fa-print"></i>
+                                    Iso Digital v1</span>
+                                <span class="btn btn-warning" id="printIso_blanko_v1"><i
+                                    class="fa fa-file"></i>
+                                    Blanko Iso v1</span>
+                            </div>
                         </div>
                     </div>
                     {{-- <div class="row">
@@ -205,14 +213,14 @@
                 <td>{{ $key->iso_r->kode }}</td>
                 <td data-toggle="tooltip" data-placement="bottom" title="{{ $key->scope }}">
                     @if($key->lap_r)
-                        @foreach($key->lap_r->scope_r as $key)
-                            {{-- {{ $key->scope_r->nama_en }},  --}}
-                            @if($loop->last)
-                                {{ $key->scope_r->nama_en }}
-                            @else
-                                {{ $key->scope_r->nama_en }}, 
-                            @endif
-                        @endforeach
+                            @foreach($key->lap_r->scope_r as $key)
+                                {{-- {{ $key->scope_r->nama_en }},  --}}
+                                @if($loop->last)
+                                    {{  $key->scope_r ? $key->scope_r->nama_en : '' }}
+                                @else
+                                    {{ $key->scope_r ? $key->scope_r->nama_en : '' }}, 
+                                @endif
+                            @endforeach
                     @endif
                     {{-- {{ str_limit($key->scope, 20) }} --}}
                 </td>
@@ -513,6 +521,40 @@
             } else {
                 url = id[0];
                 window.open("{{ url('iso/print_blanko') }}/" + url,'_blank');
+            }
+        });
+
+        // Button print iso click
+        $('#printIso_v1').on('click', function (e) {
+            e.preventDefault();
+            var id = [];
+            $('.selection:checked').each(function () {
+                id.push($(this).data('id'));
+            });
+            if (id.length == 0) {
+                alert('Tidak ada data yang terpilih');
+            } else if (id.length > 1) {
+                alert('Harap pilih satu data untuk di ubah');
+            } else {
+                url = id[0];
+                window.open("{{ url('iso/print/crowded') }}/" + url,'_blank');
+            }
+        });
+
+        // Button print iso click
+        $('#printIso_blanko_v1').on('click', function (e) {
+            e.preventDefault();
+            var id = [];
+            $('.selection:checked').each(function () {
+                id.push($(this).data('id'));
+            });
+            if (id.length == 0) {
+                alert('Tidak ada data yang terpilih');
+            } else if (id.length > 1) {
+                alert('Harap pilih satu data untuk di ubah');
+            } else {
+                url = id[0];
+                window.open("{{ url('iso/print/crowded/blanko') }}/" + url,'_blank');
             }
         });
 
