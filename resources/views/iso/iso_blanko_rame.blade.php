@@ -126,8 +126,7 @@
             "Provision of
            @foreach($data->lap_r->scope_r as $key)
            @if($loop->last) and @endif{{ $key->scope_r->nama_en }}@if(!$loop->last), @endif
-           @endforeach
-            "</p>
+           @endforeach"</p>
         @endif
       </div>
       <div style="margin-left: 115px; margin-right: 120px;">

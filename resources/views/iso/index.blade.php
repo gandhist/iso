@@ -27,57 +27,36 @@
             <br />
             @endif
             {{-- form filter --}}
-            <form action="{{ url('isos/index') }}" enctype="multipart/form-data" name="filterData"
-            id="filterData" method="post">
+            <form action="{{ route('isos.index') }}"  name="filterData"
+            id="filterData" method="get">
             @csrf
             <div class="row">
                 <div class="col-sm-6">
                     <!-- Table Filter -->
-                    {{-- <table class="table table-condensed table-filter">
+                    <table class="table table-condensed table-filter">
                         <tbody>
                             <tr>
                                 <td>
                                     <div class="input-group">
-                                        <span class="input-group-addon customInput">Tgl Terbit SKP</span>
-                                        <input id="f_awal_terbit" name="f_awal_terbit"
-                                            value="{{ request()->get('f_awal_terbit') }}" autocomplete="off"
+                                        <span class="input-group-addon customInput">First Surveillance &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                        <input id="f_awal_first" name="f_awal_first"
+                                            value="{{ request()->get('f_awal_first') }}" autocomplete="off"
                                             data-provide="datepicker" data-date-format="dd/mm/yyyy" type="text"
                                             class="form-control customInput" placeholder="Tgl Awal">
                                         <span class="input-group-addon customInput">s/d</span>
-                                        <input id="f_akhir_terbit" name="f_akhir_terbit"
-                                            value="{{ request()->get('f_akhir_terbit') }}" autocomplete="off"
+                                        <input id="f_akhir_first" name="f_akhir_first"
+                                            value="{{ request()->get('f_akhir_first') }}" autocomplete="off"
                                             data-provide="datepicker" data-date-format="dd/mm/yyyy" type="text"
                                             class="form-control customInput" placeholder="Tgl Akhir">
                                     </div>
                                 </td>
-                                <td>
-                                    <div class="input-group customSelect2md">
-                                        <select class="form-control select2" name="f_jenis_usaha"
-                                            id="f_jenis_usaha">
-                                            <option selected value="">Jenis Usaha</option>
-                                        </select>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group customSelect2md">
-                                        <select class="form-control select2" name="f_pjk3" id="f_pjk3">
-                                            <option selected value="">PJK3</option>
-                                        </select>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="input-group customSelect2md">
-                                        <select class="form-control select2" name="f_instansi" id="f_instansi">
-                                            <option selected value="">Instansi_Reff</option>
-                                        </select>
-                                    </div>
-                                </td>
+                                
                                 <td style="padding-right: 0px">
                                     <button type="submit" class="btn btn-sm btn-info"> <i class="fa fa-filter"></i>
                                         Filter</button>
                                 </td>
                                 <td style="padding-left: 0px">
-                                    <a href="{{ url('daftarpjk3') }}" class="btn btn-sm btn-default"> <i
+                                    <a href="{{ route('isos.index') }}" class="btn btn-sm btn-default"> <i
                                             class="fa fa-refresh"></i>
                                         Reset</a>
                                 </td>
@@ -85,34 +64,20 @@
                             <tr>
                                 <td>
                                     <div class="input-group">
-                                        <span class="input-group-addon customInput">Tgl Akhir SKP &nbsp;</span>
-                                        <input id="f_awal_akhir" name="f_awal_akhir"
-                                            value="{{ request()->get('f_awal_akhir') }}" autocomplete="off"
+                                        <span class="input-group-addon customInput">Second Surveillance &nbsp;</span>
+                                        <input id="f_awal_second" name="f_awal_second"
+                                            value="{{ request()->get('f_awal_second') }}" autocomplete="off"
                                             data-provide="datepicker" data-date-format="dd/mm/yyyy" type="text"
                                             class="form-control customInput" placeholder="Tgl Awal">
                                         <span class="input-group-addon customInput">s/d</span>
-                                        <input id="f_akhir_akhir" name="f_akhir_akhir"
-                                            value="{{ request()->get('f_akhir_akhir') }}" autocomplete="off"
+                                        <input id="f_akhir_second" name="f_akhir_second"
+                                            value="{{ request()->get('f_akhir_second') }}" autocomplete="off"
                                             data-provide="datepicker" data-date-format="dd/mm/yyyy" type="text"
                                             class="form-control customInput" placeholder="Tgl Akhir">
                                     </div>
                                 </td>
 
-                                <td>
-                                    <div class="input-group customSelect2md">
-                                        <select class="form-control select2" name="f_provinsi" id="f_provinsi">
-                                            <option value="">Provinsi PJK3</option>
-                                        </select>
-                                    </div>
-                              </td>
-
-                                <td>
-                                    <div class="input-group customSelect2md">
-                                        <select class="form-control select2" name="f_bidang" id="f_bidang">
-                                            <option selected value="">Bidang</option>
-                                        </select>
-                                    </div>
-                                </td>
+                                
                                 <td>
 
                                 </td>
@@ -121,7 +86,7 @@
                                 </td>
                             </tr>
                         </tbody>
-                    </table> --}}
+                    </table>
                     <!-- End -->
                 </div>
 
@@ -150,21 +115,26 @@
                             </div>
                         </div>
                     </div>
-                    {{-- <div class="row">
+                    <div class="row">
                         <div class="col-xs-12">
-                            <div class="btn-group">
-                                <a href="{{ route('isos.create') }}" class="btn btn-info"> <i
-                                        class="fa fa-plus"></i>
-                                    Tambah</a>
-                                <button class="btn btn-success" id="btnEdit" name="btnEdit"> <i
-                                        class="fa fa-edit"></i>
-                                    Ubah</button>
-                                <button type="button" class="btn btn-danger" id="btnHapus" name="btnHapus"> <i
-                                        class="fa fa-trash"></i>
-                                    Hapus</button>
-                            </div>
+                            <div class="btn-group" style="padding-right:0px !important">
+                                <button type="button" id="btnGenerate1" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Sedang Proses..." class="btn btn-primary btn-xs"> <i class="fa fa-gear"></i> Paid</button>
+                                <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                    <span class="caret"></span>
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <button style="width:110px" type="button" onclick="paidSurv('first')" class="btn btn-xs btn-primary gentagihan"> First Surv</button>
+                                    </li>
+                                    <li>
+                                        <button style="width:110px" type="button" onclick="paidSurv('second')" class="btn btn-xs btn-primary gentagihan"> Second Surv</button>
+                                    </li>
+                                    </li>
+                                </ul>
                         </div>
-                    </div> --}}
+                        </div>
+                    </div>
                 </div>
             </div>
         </form>
@@ -183,8 +153,10 @@
                 {{-- <th>Prov</th> --}}
                 <th>No_srtf</th>
                 <th>tgl_srtf</th>
+                <th>first_surveillance</th>
+                <th>second_surveillance</th>
                 <th>Tipe_ISO</th>
-                <th>Scope</th>
+                {{-- <th>Scope</th> --}}
             </tr>
         </thead>
         <tbody>
@@ -210,11 +182,22 @@
                  >{{ $key->prov_r->nama_singkat }}</td> --}}
                 <td>{{ $key->no_sert }}</td>
                 <td><span style="display:none;"> {{ $key->tgl_sert }} </span>{{ \Carbon\Carbon::parse($key->tgl_sert)->isoFormat('DD MMMM YYYY') }}</td>
+                <td>
+                    <span style="display:none;"> {{ $key->first_surv }} </span>
+                    <span class="@if($key->is_paid_first_surv == 0) btn-warning @elseif($key->is_paid_first_surv == 1) btn-success @endif">
+                        {{ \Carbon\Carbon::parse($key->first_surv)->isoFormat('DD MMMM YYYY') }}
+                    </span>
+                </td>
+                <td>
+                    <span style="display:none;"> {{ $key->second_surv }} </span>
+                    <span class="@if($key->is_paid_second_surv == 0) btn-warning @elseif($key->is_paid_second_surv == 1) btn-success @endif">
+                        {{ \Carbon\Carbon::parse($key->second_surv)->isoFormat('DD MMMM YYYY') }}
+                    </span>
+                </td>
                 <td>{{ $key->iso_r->kode }}</td>
-                <td data-toggle="tooltip" data-placement="bottom" title="{{ $key->scope }}">
+                {{-- <td data-toggle="tooltip" data-placement="bottom" title="{{ $key->scope }}">
                     @if($key->lap_r)
                             @foreach($key->lap_r->scope_r as $key)
-                                {{-- {{ $key->scope_r->nama_en }},  --}}
                                 @if($loop->last)
                                     {{  $key->scope_r ? $key->scope_r->nama_en : '' }}
                                 @else
@@ -222,8 +205,7 @@
                                 @endif
                             @endforeach
                     @endif
-                    {{-- {{ str_limit($key->scope, 20) }} --}}
-                </td>
+                </td> --}}
                 
             </tr>
             @endforeach
@@ -286,6 +268,36 @@
                     <button type="submit" class="btn btn-danger" data-id=""
                         data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Deleting..."
                         id="confirm-delete">Hapus</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{{-- end of modal konfirmasi hapus --}}
+
+{{-- modal konfirmasi hapus --}}
+<div class="modal fade" id="modal-konfirmasi-surveilance" method="post" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <form action="{{ url('isos/update-paid') }}" class="form-horizontal" id="formDelete" name="formDelete"
+        method="post" enctype="multipart/form-data">
+        @csrf
+        <input type="hidden" value="" name="id_surveilance" id="id_surveilance">
+        <input type="hidden" value="" name="param_surveilance" id="param_surveilance">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span
+                            aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Konfirmasi</h4>
+                </div>
+                <div class="modal-body" id="konfirmasi-body">
+                    ubah status surveillance?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-danger" data-id=""
+                        data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Deleting..."
+                        id="confirm-delete">Ya</button>
                 </div>
             </div>
         </div>
@@ -559,6 +571,27 @@
         });
 
     }); // end function
+
+    paidSurv = (param) => {
+        // e.preventDefault();
+        var id = [];
+        $('.selection:checked').each(function () {
+            id.push($(this).data('id'));
+        });
+        $("#id_surveilance").val(id);
+        $("#param_surveilance").val(param);
+        if (id.length == 0) {
+            Swal.fire({
+                title: "Tidak ada data yang terpilih",
+                type: 'warning',
+                confirmButtonText: 'Close',
+                confirmButtonColor: '#AAA'
+            });
+            // Swal.fire('Tidak ada data yang terpilih');
+        } else {
+            $('#modal-konfirmasi-surveilance').modal('show');
+        }
+    }
 
     // Initialize Select2 Elements
     $('.select2').select2()

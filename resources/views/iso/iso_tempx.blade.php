@@ -122,12 +122,11 @@
          @endforeach
         </p>
         @else 
-        <p style="font-size: 16px; font-weight: bold; text-align: justify; line-height: 120%; margin-top:-15px;">
+        <p style="font-size: 15px; font-weight: bold; text-align: justify; line-height: 120%; margin-top:-15px;">
             "Provision of
            @foreach($data->lap_r->scope_r as $key)
            @if($loop->last) and @endif{{ $key->scope_r->nama_en }}@if(!$loop->last), @endif
-           @endforeach
-            "</p>
+           @endforeach"</p>
         @endif
       </div>
       <div style="margin-left: 115px; margin-right: 120px;">

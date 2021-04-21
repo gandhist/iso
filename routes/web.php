@@ -94,6 +94,7 @@ Route::group(['middleware' => 'auth.admin','prefix' => 'seminar'], function () {
 
 Route::namespace('Iso')->group(function(){
 	Route::post('iso/destroy', 'IsoController@destroy');
+	Route::post('isos/update-paid', 'IsoController@paid');
 	Route::resource('isos', 'IsoController');
 });
 

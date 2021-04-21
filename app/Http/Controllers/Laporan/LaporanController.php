@@ -36,7 +36,7 @@ class LaporanController extends Controller
     public function index()
     {
         //
-        $data = Laporan::all();
+        $data = Laporan::orderBy('id','desc')->get();
         return view('laporan.index')->with(compact('data'));
     }
 

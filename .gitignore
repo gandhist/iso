@@ -1,7 +1,9 @@
 /vendor/
+.vscode
 node_modules/
 npm-debug.log
 yarn-error.log
+storage
 
 # Laravel 4 specific
 bootstrap/compiled.php
@@ -11,6 +13,7 @@ app/storage/
 public/storage
 public/hot
 public/uploads
+public/pdf
 
 # Laravel 5 & Lumen specific with changed public path
 public_html/storage
@@ -18,9 +21,12 @@ public_html/hot
 
 storage/*.key
 .env
-/.vscode
 Homestead.yaml
 Homestead.json
 /.vagrant
 .phpunit.result.cache
-public/
+.htaccess
+.gitignore
+.settings.json
+composer.lock
+node_modules

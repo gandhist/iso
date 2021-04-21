@@ -25,10 +25,22 @@ class IsoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $data = IsoModel::all();
+        
+        $data = IsoModel::orderBy('id','desc');
+        if($request->get('f_awal_first') && $request->get('f_akhir_first')){
+            $f_aw_surv = Carbon::createFromFormat('d/m/Y',$request->get('f_awal_first'))->format('Y-m-d');
+            $f_ak_surv = Carbon::createFromFormat('d/m/Y',$request->get('f_akhir_first'))->format('Y-m-d');
+            $data->whereBetween("first_surv",[$f_aw_surv, $f_ak_surv])->orderBy('first_surv','desc');
+        }
+        if($request->get('f_awal_second') && $request->get('f_akhir_second')){
+            $f_aw_surv = Carbon::createFromFormat('d/m/Y',$request->get('f_awal_second'))->format('Y-m-d');
+            $f_ak_surv = Carbon::createFromFormat('d/m/Y',$request->get('f_akhir_second'))->format('Y-m-d');
+            $data->whereBetween("second_surv",[$f_aw_surv, $f_ak_surv])->orderBy('second_surv','desc');
+        }
+        $data = $data->get();
         return view('iso.index')->with(compact('data'));
     }
 
@@ -235,7 +247,43 @@ class IsoController extends Controller
     public function validity($id){
         $idc = Hashids::decode($id);
         $data = IsoModel::find($idc[0]);
-        return view('iso.validity')->with(compact('data'));
+        $frst = strtotime($data->first_surv);
+        $scnd = strtotime($data->second_surv);
+        $now = strtotime(Carbon::now()->isoFormat('YYYY-MM-DD'));
+        $first_surv = false;
+        $second_surv = false;
+        if($now >= $frst){
+            switch ($data->is_paid_first_surv) {
+                case '0':
+                    $first_surv = false;
+                    break;
+                
+                default:
+                    $first_surv = true;
+                    break;
+            }
+        }
+        else {
+            $first_surv = true;
+        }
+        if($now >= $scnd){
+            switch ($data->is_paid_second_surv) {
+                case '0':
+                    $second_surv = false;
+                    break;
+                
+                default:
+                    $second_surv = true;
+                    break;
+            }
+        }
+        else {
+            $second_surv = true;
+            if($data->is_paid_first_surv == 0){
+                $second_surv = false;
+            }
+        }
+        return view('iso.validity')->with(compact('data','first_surv','second_surv'));
     }
 
     // generate iso number
@@ -271,6 +319,24 @@ class IsoController extends Controller
             ], 200);
         }
 
+
+    }
+
+    // update paid
+    public function paid (Request $request){
+        $idData = explode(',', $request->id_surveilance);
+        $update_data = [
+            'updated_at' => Carbon::now()->toDateTimeString(),
+            'updated_by' => Auth::id(),
+        ];
+        $data = IsoModel::whereIn('id', $idData);
+        if($request->param_surveilance == "first"){
+            $data->update(array_merge($update_data, ['is_paid_first_surv' => 1]));
+        }
+        else {
+            $data->where('is_paid_first_surv', 1)->update(array_merge($update_data, ['is_paid_second_surv' => 1]));
+        }
+        return redirect('isos')->with('success', 'Berhasil ubah status pembayaran surveillance');
 
     }
 

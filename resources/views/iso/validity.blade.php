@@ -212,13 +212,25 @@
                                 <td class="bg-aqua-active">1<sup>st</sup> Surveilance</td>
                                 <td class="text-center">{{ \Carbon\Carbon::parse($data->first_surv)->isoFormat('DD MMMM YYYY') }}</td>
                                 <td class="bg-aqua-active">1<sup>st</sup> Surveilance Status</td>
-                                <td class="text-center"><button type="button" class="btn btn-block btn-success">Valid</button></td>
+                                <td class="text-center">
+                                  @if($first_surv)
+                                    <button type="button" class="btn btn-block btn-success">Valid</button>
+                                    @else
+                                    <button type="button" class="btn btn-block btn-warning">In-Valid</button>
+                                  @endif
+                                </td>
                             </tr>
                             <tr>
                                 <td class="bg-aqua-active">2<sup>nd</sup> Surveilance</td>
                                 <td class="text-center">{{ \Carbon\Carbon::parse($data->second_surv)->isoFormat('DD MMMM YYYY') }}</td>
                                 <td class="bg-aqua-active">2<sup>nd</sup> Surveilance Status</td>
-                                <td class="text-center"><button type="button" class="btn btn-block btn-success">Valid</button></td>
+                                <td class="text-center">
+                                  @if($second_surv)
+                                    <button type="button" class="btn btn-block btn-success">Valid</button>
+                                    @else
+                                    <button type="button" class="btn btn-block btn-warning">In-Valid</button>
+                                  @endif
+                                </td>
                             </tr>
                         </table>
                     </div>
