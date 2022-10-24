@@ -114,21 +114,24 @@
           <br> as confirming to the requirements of :</p>
         <p style="font-size: 24px; font-weight: bold; color: #206f9c; text-transform: uppercase; text-align: center;">{{ $data->iso_r->nama_en }}</p>
         <p style="font-size: 42px; font-weight: bold; color: #206f9c; text-transform: uppercase; text-align: center; margin-top: -5PX;">{{ $data->iso_r->kode }}</p>
-        <P style="margin-top: -10px; text-align: center;">For the following Scope :</P>
-        @if($data->lap_r->scope_r->count() == 1)
-        <p style="font-size: 16px; font-weight: bold; text-align: center; line-height: 150%;">
-         @foreach($data->lap_r->scope_r as $key)
-         "{{ $key->scope_r->nama_en }}"
-         @endforeach
-        </p>
-        @else 
-        <p style="font-size: 16px; font-weight: bold; text-align: justify; line-height: 150%;">
-            "Provision of
-           @foreach($data->lap_r->scope_r as $key)
-           @if($loop->last) and @endif{{ $key->scope_r->nama_en }}@if(!$loop->last), @endif
-           @endforeach
-            "</p>
+        <P style="margin-top: -10px; text-align: center;">For the following Scope : </P>
+        @if($data->lap_r->scope != null)
+          <p style="font-size: 16px; font-weight: bold; text-align: center; line-height: 150%;">{{ $data->lap_r->scope }}</p>
+        @else
+          @if($data->lap_r->scope_r->count() == 1)
+          <p style="font-size: 16px; font-weight: bold; text-align: center; line-height: 150%;">
+          @foreach($data->lap_r->scope_r as $key)
+          "{{ $key->scope_r->nama_en }}"@endforeach
+          </p>
+          @else 
+          <p style="font-size: 16px; font-weight: bold; text-align: {{ count($data->lap_r->scope_r) < 7 ? 'center' : 'justify' }}; line-height: 150%;">
+              " Provision of
+            @foreach($data->lap_r->scope_r as $key)
+              @if($loop->last) and @endif{{ $key->scope_r->nama_en}}@if($loop->iteration < count($data->lap_r->scope_r) -1),@endif
+            @endforeach"</p>
+          @endif
         @endif
+        
       </div>
       <div style="margin-left: 115px; margin-right: 120px;">
       <table class="cert" width="420px">

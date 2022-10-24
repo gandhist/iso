@@ -213,7 +213,9 @@
                                 <td class="text-center">{{ \Carbon\Carbon::parse($data->first_surv)->isoFormat('DD MMMM YYYY') }}</td>
                                 <td class="bg-aqua-active">1<sup>st</sup> Surveilance Status</td>
                                 <td class="text-center">
-                                  @if($first_surv)
+                                  {{-- di validkan as request pak arief 13012022 --}}
+                                  {{-- <button type="button" class="btn btn-block btn-success">Valid</button> --}}
+                                  @if(\Carbon\Carbon::parse($data->first_surv)->isoFormat('YYYY') <= 2021)
                                     <button type="button" class="btn btn-block btn-success">Valid</button>
                                     @else
                                     <button type="button" class="btn btn-block btn-warning">In-Valid</button>
@@ -225,7 +227,8 @@
                                 <td class="text-center">{{ \Carbon\Carbon::parse($data->second_surv)->isoFormat('DD MMMM YYYY') }}</td>
                                 <td class="bg-aqua-active">2<sup>nd</sup> Surveilance Status</td>
                                 <td class="text-center">
-                                  @if($second_surv)
+                                  {{-- <button type="button" class="btn btn-block btn-success">Valid</button> --}}
+                                  @if(\Carbon\Carbon::parse($data->second_surv)->isoFormat('YYYY') <= 2021)
                                     <button type="button" class="btn btn-block btn-success">Valid</button>
                                     @else
                                     <button type="button" class="btn btn-block btn-warning">In-Valid</button>

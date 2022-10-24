@@ -425,7 +425,7 @@
                                     <tr>
                                     <tr>
                                         <td colspan="24" style="padding: 2px; border: 1px solid black; text-align: justify;"><b>Detail of Non-Conformity :
-                                            {{ $data->doc_r->nama }} <br>
+                                            {{ $data->doc ? $data->doc_r->nama : '' }} <br>
                                             <select name="doc" id="doc">
                                                 @foreach($doc as $key)
                                                     <option {{ $data->doc == $key->id ? 'selected' :'' }} value="{{ $key->id }}">{{ $key->nama }}</option>

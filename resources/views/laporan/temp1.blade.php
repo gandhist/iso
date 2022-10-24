@@ -273,7 +273,7 @@
 
                 {{-- <ol type="1" start="4" style="page-break-inside: avoid;"> --}}
                     <li><b>Hasil Audit Sebelumnya (N/A)</b></li>
-                    Hasil audit terakhir dari sistem ini telah ditinjau, khususnya untuk memastikan kereksi yang
+                    Hasil audit terakhir dari sistem ini telah ditinjau, khususnya untuk memastikan koreksi yang
                     sesuai.<br>
                     <table border=0 width=95%>
                         <tr>

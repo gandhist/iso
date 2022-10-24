@@ -97,7 +97,7 @@
                          </td>
                          <td>{{ $loop->iteration }}</td>
                          <td>{{ $key->bu_r ? $key->bu_r->nama_bu : '' }}</td>
-                         <td>{{ $key->iso_r->kode }}</td>
+                         <td>{{ $key->iso_laporan ? $key->iso_r->kode : '' }}</td>
                          <td>{{ $key->id_number }}</td>
                          <td>{{ $key->audit_date }}</td>
                          <td align='center'>

@@ -194,7 +194,7 @@
                         {{ \Carbon\Carbon::parse($key->second_surv)->isoFormat('DD MMMM YYYY') }}
                     </span>
                 </td>
-                <td>{{ $key->iso_r->kode }}</td>
+                <td>{{ $key->iso_standard ? $key->iso_r->kode : '' }}</td>
                 {{-- <td data-toggle="tooltip" data-placement="bottom" title="{{ $key->scope }}">
                     @if($key->lap_r)
                             @foreach($key->lap_r->scope_r as $key)
