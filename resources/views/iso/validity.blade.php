@@ -136,18 +136,23 @@
                 </div>
               <div class="row">
                 <div class="col-sm-4 border-right text-center">
-                    <h4>Scope Of Sertification :</h4>
+                    <h4>Scope Of Certification :</h4>
                   <div class="description-block">
                     <h5 class="description-header">
                         @if($data->lap_r)
-                            @foreach($data->lap_r->scope_r as $key)
-                                {{-- {{ $key->scope_r->nama_en }},  --}}
-                                @if($loop->last)
-                                    {{ $key->scope_r->nama_en }}
-                                @else
-                                    {{ $key->scope_r->nama_en }}, 
-                                @endif
-                            @endforeach
+                            @if ($data->lap_r->scope)
+                                {{ $data->lap_r->scope }}
+                            @else
+                                @foreach($data->lap_r->scope_r as $key)
+                                    {{-- {{ $key->scope_r->nama_en }},  --}}
+                                    @if($loop->last)
+                                        {{ $key->scope_r->nama_en }}
+                                    @else
+                                        {{ $key->scope_r->nama_en }}, 
+                                    @endif
+                                @endforeach
+                            @endif
+                            
                         @endif
                     </h5>
                   </div>
@@ -215,7 +220,7 @@
                                 <td class="text-center">
                                   {{-- di validkan as request pak arief 13012022 --}}
                                   {{-- <button type="button" class="btn btn-block btn-success">Valid</button> --}}
-                                  @if(\Carbon\Carbon::parse($data->first_surv)->isoFormat('YYYY') <= 2021)
+                                  @if(\Carbon\Carbon::parse($data->first_surv)->isoFormat('YYYY') <= 2022)
                                     <button type="button" class="btn btn-block btn-success">Valid</button>
                                     @else
                                     <button type="button" class="btn btn-block btn-warning">In-Valid</button>
