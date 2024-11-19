@@ -220,7 +220,7 @@
                                 <td class="text-center">
                                   {{-- di validkan as request pak arief 13012022 --}}
                                   {{-- <button type="button" class="btn btn-block btn-success">Valid</button> --}}
-                                  @if(\Carbon\Carbon::parse($data->first_surv)->isoFormat('YYYY') <= 2022)
+                                  @if(\Carbon\Carbon::parse($data->first_surv)->isoFormat('YYYY'))
                                     <button type="button" class="btn btn-block btn-success">Valid</button>
                                     @else
                                     <button type="button" class="btn btn-block btn-warning">In-Valid</button>
@@ -233,7 +233,7 @@
                                 <td class="bg-aqua-active">2<sup>nd</sup> Surveilance Status</td>
                                 <td class="text-center">
                                   {{-- <button type="button" class="btn btn-block btn-success">Valid</button> --}}
-                                  @if(\Carbon\Carbon::parse($data->second_surv)->isoFormat('YYYY') <= 2021)
+                                  @if(\Carbon\Carbon::parse($data->second_surv)->isoFormat('YYYY') <= 2023)
                                     <button type="button" class="btn btn-block btn-success">Valid</button>
                                     @else
                                     <button type="button" class="btn btn-block btn-warning">In-Valid</button>

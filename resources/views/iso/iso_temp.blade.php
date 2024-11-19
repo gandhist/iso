@@ -109,7 +109,7 @@
         <div style="text-indent: 28px">
           <p style="font-size: 26px; margin-top:-10px; font-weight: bold; text-align: center;">{{ $data->nama_bu }}</p>
         </div>
-        <p style="margin-top: -20px; text-align: center; text-indent: 22px">{{ $data->alamat }} {{ $data->kota ? $data->kota_r->nama : '' }}</p>
+        <p style="margin-top: -20px; text-align: center; text-indent: 22px">{!! nl2br($data->alamat) !!} {{ $data->kota ? $data->kota_r->nama : '' }}</p>
         <p style="line-height: 150%; text-align: center;">&nbsp; has been assessed and registered by <strong>PT. Sertifikasi Badan Usaha Mandiri</strong> 
           <br> as confirming to the requirements of :</p>
         <p style="font-size: 24px; font-weight: bold; color: #206f9c; text-transform: uppercase; text-align: center;">{{ $data->iso_r->nama_en }}</p>

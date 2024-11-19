@@ -104,7 +104,7 @@
       <div style="margin-top: 90px; margin-left: 115px; margin-right: 120px; text-align: justify;">
         <p style="text-align: center;">This is to certify that</p>
         <p style="font-size: 28px; margin-top:-10px; font-weight: bold; text-align: center;">{{ $data->nama_bu }}</p>
-        <p style="margin-top: -20px; text-align: center;">{{ $data->alamat }} {{ $data->kota ? $data->kota_r->nama : '' }}</p>
+        <p style="margin-top: -20px; text-align: center;">{!! nl2br($data->alamat) !!} {{ $data->kota ? $data->kota_r->nama : '' }}</p>
         <p style="line-height: 150%; text-align: center;">&nbsp; has been assessed and registered by <strong>PT. Sertifikasi Badan Usaha Mandiri</strong> 
           <br> as confirming to the requirements of :</p>
         <p style="font-size: 24px; font-weight: bold; color: #206f9c; text-transform: uppercase; text-align: center;">{{ $data->iso_r->nama_en }}</p>

@@ -104,12 +104,12 @@
         <br>
         {{-- <span style="color: #206f9c; font-size: 18px;"><strong>{{ $data->iso_r->kode }}</strong></span> --}}
       </div>
-      <div style="margin-top: 90px; margin-left: 115px; margin-right: 110px; text-align: justify; border: 0px #206f9c solid;">
+      <div style="margin-top: 105px; margin-left: 115px; margin-right: 110px; text-align: justify; border: 0px #206f9c solid;">
         <p style="text-align: center; margin-top: -2px;">This is to certify that</p>
         <div style="text-indent: 28px">
           <p style="font-size: 26px; margin-top:-15px; font-weight: bold; text-align: center;">{{ $data->nama_bu }}</p>
         </div>
-        <p style="margin-top: -20px; text-align: center; text-indent: 22px">{{ $data->alamat }} {{ $data->kota ? $data->kota_r->nama : '' }}</p>
+        <p style="margin-top: -20px; text-align: center; text-indent: 22px">{!! nl2br($data->alamat) !!} {{ $data->kota ? $data->kota_r->nama : '' }}</p>
         <p style="line-height: 150%; text-align: center; margin-top:-15px;">&nbsp; has been assessed and registered by <strong>PT. Sertifikasi Badan Usaha Mandiri</strong> 
           <br> as confirming to the requirements of :</p>
         <p style="font-size: 24px; font-weight: bold; color: #206f9c; text-transform: uppercase; text-align: center; margin-top:-15px;">{{ $data->iso_r->nama_en }}</p>
