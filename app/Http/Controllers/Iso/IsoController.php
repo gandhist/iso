@@ -200,6 +200,22 @@ class IsoController extends Controller
         return view('iso.iso_temp');
     }
 
+    public function print_v2($id){
+        // generate qr first
+        $idc = Hashids::encode($id);
+        $url4 = url("iso/validity/$idc");
+        $nama4 = "QR_".$id.".png";
+        $qrcode4 = \QrCode::margin(100)->format('png')->errorCorrection('L')->size(150)->generate($url4, base_path("public/qr/".$nama4));
+
+        $data['data'] = IsoModel::find($id);
+        // return view('iso.iso_temp_v2', $data);
+
+        $pdf = PDF::loadview('iso.iso_temp_v2', $data);
+        $pdf->setPaper('A4','portrait');
+        return $pdf->stream("Sertifikat.pdf");
+        return view('iso.iso_temp');
+    }
+
     public function printx($id){
         // generate qr first
         $idc = Hashids::encode($id);
