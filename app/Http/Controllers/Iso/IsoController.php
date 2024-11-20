@@ -209,7 +209,6 @@ class IsoController extends Controller
 
         $data['data'] = IsoModel::find($id);
         // return view('iso.iso_temp_v2', $data);
-
         $pdf = PDF::loadview('iso.iso_temp_v2', $data);
         $pdf->setPaper('A4','portrait');
         return $pdf->stream("Sertifikat.pdf");

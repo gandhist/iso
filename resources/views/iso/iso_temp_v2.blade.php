@@ -165,7 +165,7 @@
             @endif
           </td>
           <td colspan="8" style="padding: 20px; vertical-align: bottom; text-align: center;"><img style="background-color: transparent;
-            border: none;" src="{{  public_path('iso/images/') }}/oemarj.png" width="140px" height="50px" ><br>Director</td>
+            border: none;" src="{{  public_path('iso/images') }}/oemarj.png" width="140px" height="50px" ><br>Director</td>
         </tr>
         {{-- <tr>
           <td colspan="8" style="text-align: left;">
